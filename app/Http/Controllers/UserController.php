@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Models\User;
 use App\Models\Ticket;
 use App\Models\Event;
+use App\Models\UserEventTicket;
 
 class UserController extends Controller
 {
@@ -23,16 +24,25 @@ class UserController extends Controller
     }
     public function store(Request $request)
     {
-        $data=$request->all();
+        $data=$request->except(['_token']);
         $this->validate($request,[
              'name' => 'required|max:255',
              'lastname' => 'required|max:255',
-             'email'=> 'required|email|unique:users',
-             'event_id' => 'required',
-             'ticket_id' => 'required'
+             'email'=> 'required|email'
+             
         ]);
         $event_id=$data['event_id'];
-        User::create($data);
+        $user=User::firstOrCreate([
+            'email'=> $data['email']
+        ], [
+            'name' => $data['name'],
+            'lastname' => $data['lastname'],
+            ]);
+        UserEventTicket::create([
+            'user_id' => $user->id,
+            'event_id' => $data['event_id'],
+            'ticket_id' => $data['ticket_id']
+        ]);
         return redirect()->route('events.show',[
             'id'=>$event_id
         ]);

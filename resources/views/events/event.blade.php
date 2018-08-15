@@ -20,13 +20,13 @@
             <tbody>
                 @if ($users) @foreach($users as $user)
                 <tr>
-                    <td>{{ substr($user->created_at,0,-3) }}
+                    <td>{{ $user->created_at }}
                     </td>
                     <td>{{ $user->email }}</td>
                     <td><span>{{ $user->name }}</span> <span>{{ $user->lastname}}</span> </td>
-                    <td>{{ $user->ticket->category }}</td>
-                    <td>{{ $user->ticket->price }}$</td>
-                    <td class="description-td">{{ $user->ticket->description }}</td>
+                    <td>{{ $user->ticket }}</td>
+                    <td>{{ $user->t_price }}$</td>
+                    <td class="description-td">{{ $user->t_description }}</td>
                 </tr>
                 @endforeach @endif
             </tbody>

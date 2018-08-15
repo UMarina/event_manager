@@ -20,7 +20,7 @@
                 @if ($events) 
                     @foreach($events as $event)
                         <tr>
-                            <td>{{ $event->date_start }} <br> start: {{ substr($event->time_start,0,-3) }}
+                            <td>{{explode(' ',$event->date_time_start)[0]  }} <br> start: {{ substr(explode(' ',$event->date_time_start)[1],0,-3) }}
                             </td>
                             <td>{{ $event->title }}</td>
                             <td> <a href="{{ route('events.show',$event->id)}}" class="btn btn-info">Show</a> </td>
