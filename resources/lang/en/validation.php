@@ -100,8 +100,9 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'email' => [
+            'unique' => 'A user with this email has already registered for this event. Use another email to register.
+',
         ],
     ],
 
