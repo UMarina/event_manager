@@ -24,9 +24,9 @@
                     </td>
                     <td>{{ $user->email }}</td>
                     <td><span>{{ $user->name }}</span> <span>{{ $user->lastname}}</span> </td>
-                    <td>{{ $user->ticket }}</td>
-                    <td>{{ $user->t_price }}$</td>
-                    <td class="description-td">{{ $user->t_description }}</td>
+                    <td>{{ $user->ticket->categoty }}</td>
+                    <td>{{ $user->ticket->price }}$</td>
+                    <td class="description-td">{{ $user->ticket->description }}</td>
                 </tr>
                 @endforeach @endif
             </tbody>

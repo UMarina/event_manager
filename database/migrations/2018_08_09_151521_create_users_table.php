@@ -13,12 +13,20 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('lastname');
-            $table->string('email',128)->unique();
+            $table->string('email',128);
+            $table->integer('event_id')->unsigned();
+            $table->integer('ticket_id')->unsigned();
+            $table->timestamp('created_at')->useCurrent();;
             
+        });
+        
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreign('event_id')->references('id')->on('events');
+            $table->foreign('ticket_id')->references('id')->on('tickets'); 
         });
         
     }
@@ -32,4 +40,6 @@ class CreateUsersTable extends Migration
     {
         Schema::dropIfExists('users');
     }
+    
+     
 }

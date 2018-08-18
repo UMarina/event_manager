@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Event;
-use App\Models\UserEventTicket;
 
 class EventController extends Controller
 {
@@ -19,8 +18,7 @@ class EventController extends Controller
     public function showEvent($id)
     { 
         $event=Event::find($id);
-        $users=UserEventTicket::getUsersForEventWithTicket($id);
-       
+        $users=$event->users;
         return view('events.event',[
             'users'=>$users,
             'event'=>$event
@@ -28,4 +26,5 @@ class EventController extends Controller
     
     }
 }
+
 
